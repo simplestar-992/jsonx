@@ -1,74 +1,85 @@
-# JSONX
+# JsonX | CLI JSON Toolkit
 
-```
-💎 jsonx 💎
-╔══════════════════╗
-║   JSONX       ║
-╚══════════════════╝
-```
+![JSON Tool](https://img.shields.io/badge/Purpose-JSON%20Toolkit-yellow?style=for-the-badge)
+![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-> A powerful tool built for modern developers
+---
 
-## ✨ Features
+## Command-line JSON Power
 
-- 🚀 Blazing fast performance
-- 💎 Clean and intuitive API
-- 🔧 Zero configuration needed
-- 🛡️ Secure by default
-- 📦 Single binary, no dependencies
+A fast, intuitive CLI tool for querying, transforming, and manipulating JSON data directly in your terminal.
 
-## 📥 Installation
+**Why JsonX?**
+- No more juggling between jq, python, and awk
+- Simple, intuitive syntax
+- Pipes perfectly with other CLI tools
+- Zero learning curve
+
+---
+
+## Features
+
+- 🔍 **Query** - Extract data with JSONPath-like syntax
+- 🎨 **Format** - Pretty print or minify JSON
+- 🔄 **Transform** - Reshape JSON structures
+- 📊 **Validate** - Check JSON syntax
+- ⚡ **Fast** - Built for speed in Go
+
+---
+
+## Installation
 
 ```bash
 git clone https://github.com/simplestar-992/jsonx.git
 cd jsonx
-go build -o jsonx .
-./jsonx --help
+go build -o jsonx -ldflags="-s -w"
 ```
-
-## 🚀 Quick Start
-
-```bash
-./jsonx -h
-```
-
-## 🧪 Examples
-
-```bash
-# Example 1
-./jsonx status
-
-# Example 2  
-./jsonx --verbose
-
-# Example 3
-./jsonx help
-```
-
-## 📊 Project Info
-
-| Property | Value |
-|----------|-------|
-| Language | Go 🟢 |
-| Status | Active |
-| License | MIT |
-
-## 🤝 Contributing
-
-Contributions welcome! Open an issue or PR.
-
-## 📄 License
-
-MIT © **simplestar-992**
 
 ---
 
-<p align="center">
-  <img src="https://img.shields.io/badge/jsonx-yellow-yellow?style=for-the-badge" alt=""/>
-  <img src="https://img.shields.io/github/v/tag/simplestar-992/jsonx?style=for-the-badge" alt=""/>
-  <img src="https://img.shields.io/github/license/simplestar-992/jsonx?style=for-the-badge" alt=""/>
-</p>
+## Usage
 
-<p align="center">
-  Built with ❤️ by <a href="https://github.com/simplestar-992">simplestar-992</a>
-</p>
+```bash
+# Pretty print
+echo '{"name":"test"}' | ./jsonx
+
+# Query data
+./jsonx -q '.users[0].name' data.json
+
+# Extract array
+./jsonx -q '.items[*].id' data.json
+
+# Filter and transform
+./jsonx -q '.data[?@.active==true]' data.json
+
+# Minify
+./jsonx --minify data.json
+
+# Validate
+./jsonx --validate data.json
+```
+
+---
+
+## Examples
+
+```bash
+# Extract all user emails
+curl -s https://api.example.com/users | ./jsonx -q '.users[*].email'
+
+# Find active items
+cat data.json | ./jsonx -q '.items[?status=="active"]'
+
+# Get nested values
+./jsonx -q '.config.database.host' config.json
+
+# Combine with other tools
+cat data.json | ./jsonx -q '.users' | jq '.[] | .name'
+```
+
+---
+
+## License
+
+MIT © 2024 [simplestar-992](https://github.com/simplestar-992)
